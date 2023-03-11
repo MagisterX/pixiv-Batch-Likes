@@ -28,7 +28,7 @@ async function btnfunction(isall) {
 
         for (const item of s) {
             item.closest("button").click();
-            await wait(Math.random() * 1000 | 0);
+            await wait(Math.random() * 1000 + 250| 0);
         };
 
         if (isShow(arrow[1]) && isall) {
