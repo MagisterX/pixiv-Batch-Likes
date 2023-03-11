@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            pixiv USER作品點讚
 // @namespace       https://github.com/AndyTLemon/pixiv_click_illustrator_like.git
-// @version         1.0
+// @version         1.1
 // @description     USER作品點讚
 // @author          AndyTLemon
 // @match           *www.pixiv.net/users/*/*
@@ -9,25 +9,9 @@
 // @icon              https://www.pixiv.net/favicon.ico
 // ==/UserScript==
 
-function isShow(el) {
-    var style = window.getComputedStyle(el);
-    return (style.display === 'flex')
-};
+const wait = ms => new Promise(res => setTimeout(res, ms));
 
-(async function () {
-    const wait = ms => new Promise(res => setTimeout(res, ms));
-    //button
-    const btnLocaton = document.getElementsByClassName("sc-192ftwf-0 kWAFb")[0]
-    const btnLocaton2 = document.getElementsByClassName("sc-xhhh7v-0 kYtoqc")[0]
-    const btn = `<nav class="sc-192ftwf-0 kWAFb" style="justify-content: center;">
-<button class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
-border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;">點讚一頁</button>
-<button class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
-border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;">點讚全部</button>
-</nav>`;
-
-    btnLocaton.insertAdjacentHTML("beforeend", btn);
-    btnLocaton2.insertAdjacentHTML("afterend", btn);
+async function btnfunction(isall) {
 
 
     let arrow = document.getElementsByClassName("kKBslM");
@@ -47,7 +31,7 @@ border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;">點讚全�
             await wait(Math.random() * 1000 | 0);
         };
 
-        if (isShow(arrow[1])) {
+        if (isShow(arrow[1]) && isall) {
             arrow[1].click();
             await wait((Math.random() + 2) * 1000 | 0);
         }
@@ -57,4 +41,28 @@ border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;">點讚全�
     };
 
     console.log("done")
+};
+window.btnfunction = btnfunction;
+
+function isShow(el) {
+    var style = window.getComputedStyle(el);
+    return (style.display === 'flex')
+};
+
+(async function () {
+
+    //button
+    const btn = `<nav class="sc-192ftwf-0 kWAFb" style="justify-content: center;">
+<button class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
+border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="btnfunction()">點讚一頁</button>
+<button class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
+border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="btnfunction()">點讚全部</button>
+</nav>`;
+    await wait(2000);
+    let btnLocaton = document.getElementsByClassName("sc-192ftwf-0 kWAFb")[0]
+    btnLocaton.insertAdjacentHTML("beforeend", btn);
+    btnLocaton = document.getElementsByClassName("sc-xhhh7v-0 kYtoqc")[0]
+    btnLocaton.insertAdjacentHTML("afterend", btn);
+
+    console.log("done");
 })();
