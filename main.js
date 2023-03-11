@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            pixiv USER作品點讚
-// @namespace       
+// @namespace       https://github.com/AndyTLemon/pixiv_click_illustrator_like.git
 // @version         1.0
 // @description     USER作品點讚
 // @author          AndyTLemon
