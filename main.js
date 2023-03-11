@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            pixiv USER作品點讚
-// @namespace       https://github.com/AndyTLemon/pixiv_click_illustrator_like.git
+// @namespace       https://github.com/AndyTLemon/pixiv-Batch-Likes.git
 // @version         1.2
 // @description     USER作品點讚
 // @author          AndyTLemon
