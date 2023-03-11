@@ -20,15 +20,16 @@ async function btnfunction(isall) {
     if (isShow(arrow[0])) {
         document.getElementsByTagName("nav")[2].getElementsByTagName("a")[1].click();
         console.log("back to page 1");
+        await wait(Math.random() * 1000 +500| 0);
     };
 
     //click like
     while (true) {
         let s = document.getElementsByClassName("dxYRhf");
 
-        for (const item of s) {
-            item.closest("button").click();
-            await wait(Math.random() * 1000 + 250| 0);
+        for (let index=0; index < s.length; index++) {
+            s[0].closest("button").click();
+            await wait((Math.random()+2) * 1000 | 0);
         };
 
         if (isShow(arrow[1]) && isall) {
@@ -54,11 +55,11 @@ function isShow(el) {
     //button
     const btn = `<nav class="sc-192ftwf-0 kWAFb" style="justify-content: center;">
 <button class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
-border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="btnfunction()">點讚一頁</button>
+border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="btnfunction(false)">點讚一頁</button>
 <button class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
-border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="btnfunction()">點讚全部</button>
+border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="btnfunction(true)">點讚全部</button>
 </nav>`;
-    await wait(2000);
+    await wait(5000);
     let btnLocaton = document.getElementsByClassName("sc-192ftwf-0 kWAFb")[0]
     btnLocaton.insertAdjacentHTML("beforeend", btn);
     btnLocaton = document.getElementsByClassName("sc-xhhh7v-0 kYtoqc")[0]
