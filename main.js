@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name            pixiv USER作品點讚
 // @namespace       https://github.com/AndyTLemon/pixiv_click_illustrator_like.git
-// @version         1.1
+// @version         1.2
 // @description     USER作品點讚
 // @author          AndyTLemon
-// @match           *www.pixiv.net/users/*/*
+// @match           *www.pixiv.net/*/*/*
 // @grant           none
 // @icon              https://www.pixiv.net/favicon.ico
 // ==/UserScript==
