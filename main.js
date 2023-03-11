@@ -20,16 +20,16 @@ async function btnfunction(isall) {
     if (isShow(arrow[0])) {
         document.getElementsByTagName("nav")[2].getElementsByTagName("a")[1].click();
         console.log("back to page 1");
-        await wait(Math.random() * 1000 +500| 0);
+        await wait(Math.random() * 1000 + 500 | 0);
     };
 
     //click like
     while (true) {
         let s = document.getElementsByClassName("dxYRhf");
 
-        for (let index=0; index < s.length; index++) {
+        for (let index = 0; index < s.length; index++) {
             s[0].closest("button").click();
-            await wait((Math.random()+2) * 1000 | 0);
+            await wait((Math.random() + 2) * 1000 | 0);
         };
 
         if (isShow(arrow[1]) && isall) {
