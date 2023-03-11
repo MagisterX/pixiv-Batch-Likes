@@ -1,3 +1,3 @@
-# pixiv_click_illustrator_like
+# pixiv_Batch-Likes
 
-把一個繪師的全部作品點讚
+把大量作品點讚
