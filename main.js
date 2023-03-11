@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name            pixiv USER作品點讚
+// @name            pixiv批量點讚
 // @namespace       https://github.com/AndyTLemon/pixiv-Batch-Likes.git
 // @version         1.2
-// @description     USER作品點讚
+// @description     批量作品點讚
 // @author          AndyTLemon
 // @match           *www.pixiv.net/*/*/*
 // @grant           none
