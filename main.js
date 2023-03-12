@@ -1,14 +1,12 @@
 // ==UserScript==
 // @name            pixiv批量點讚
 // @namespace       https://github.com/AndyTLemon/pixiv-Batch-Likes.git
-// @version         1.4
+// @version         1.3
 // @description     批量作品點讚
 // @author          AndyTLemon
 // @match           *www.pixiv.net/*/*/*
 // @grant           none
 // @icon            https://www.pixiv.net/favicon.ico
-// @updateURL       https://github.com/AndyTLemon/pixiv-Batch-Likes/blob/main/main.js
-// @downloadURL     https://github.com/AndyTLemon/pixiv-Batch-Likes/blob/main/main.js
 // ==/UserScript==
 
 const wait = ms => new Promise(res => setTimeout(res, ms));
