@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            pixiv批量點讚
 // @namespace       https://github.com/AndyTLemon/pixiv-Batch-Likes.git
-// @version         1.3
+// @version         1.4
 // @description     批量作品點讚
 // @author          AndyTLemon
 // @match           *www.pixiv.net/*/*/*
@@ -11,6 +11,7 @@
 
 const wait = ms => new Promise(res => setTimeout(res, ms));
 let isrunning = false;
+let stopnow = false;
 
 //button
 const btn = `<nav name = "ClickLikeBtnNav" class="sc-192ftwf-0 kWAFb" style="justify-content: center;">
@@ -21,27 +22,28 @@ border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="b
 </nav>`;
 
 
-/* function stopbtnfunction() {
+function stopbtnfunction() {
     if (!isrunning) {
         return
     };
-//end btnfunction;
+    stopnow = true;
 };
-window.stopbtnfunction = stopbtnfunction; */
+window.stopbtnfunction = stopbtnfunction;
+
 
 async function btnfunction(isall) {
     if (isrunning) {
         return;
     };
     isrunning = true;
-    /*     //stopbtn
-        const stopbtn = `<button name = "stopbtn" class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
+    //stopbtn
+    const stopbtn = `<button name = "stopbtn" class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
         border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="stopbtnfunction()">停止點讚</button>`;
 
-        const stopbtnLocation = document.getElementsByName("ClickLikeBtnNav");
-        for (let item of stopbtnLocation) {
-            item.insertAdjacentHTML("beforeend", stopbtn);
-        }; */
+    const stopbtnLocation = document.getElementsByName("ClickLikeBtnNav");
+    for (let item of stopbtnLocation) {
+        item.insertAdjacentHTML("beforeend", stopbtn);
+    };
 
 
 
@@ -61,6 +63,13 @@ async function btnfunction(isall) {
         for (let index = 0; index < s.length; index++) {
             s[0].closest("button").click();
             await wait((Math.random() + 2) * 1000 | 0);
+            if (stopnow) {
+                //del stopbtn
+                for (let item of stopbtnLocation) {
+                    item.lastChild.remove();
+                };
+                return;
+            };
         };
 
         if (isShow(arrow[1]) && isall) {
@@ -72,10 +81,10 @@ async function btnfunction(isall) {
         };
     };
 
-    /*     //del stopbtn
-        for (let item of stopbtnLocation) {
-            item.lastChild.remove();
-        }; */
+    //del stopbtn
+    for (let item of stopbtnLocation) {
+        item.lastChild.remove();
+    };
     isrunning = false;
     console.log("done")
 };
@@ -86,7 +95,7 @@ function isShow(el) {
     return (style.display === 'flex')
 };
 
-async function placebtn() {
+(async function placebtn() {
     let isplace = false
     try {
         await wait(1000);
@@ -96,13 +105,9 @@ async function placebtn() {
         btnLocaton.insertAdjacentHTML("beforeend", btn);
         btnLocaton2.insertAdjacentHTML("afterend", btn);
         isplace = true
-    } catch (error) {
-        if (error && !isplace) {
+    } finally {
+        if (!isplace) {
             placebtn();
         }
     }
-}
-
-(async function () {
-    placebtn()
 })();
