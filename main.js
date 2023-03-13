@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            pixiv批量點讚
 // @namespace       https://github.com/AndyTLemon/pixiv-Batch-Likes.git
-// @version         1.4.1
+// @version         1.4.2
 // @description     批量作品點讚
 // @author          AndyTLemon
 // @match           *www.pixiv.net/*/*/*
@@ -24,7 +24,7 @@ border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="b
 
 function stopbtnfunction() {
     if (!isrunning) {
-        return
+        return;
     };
     stopnow = true;
 };
@@ -37,7 +37,7 @@ async function btnfunction(isall) {
     };
     isrunning = true;
     stopnow = false;
-    
+
     //stopbtn
     const stopbtn = `<button name = "stopbtn" class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
         border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="stopbtnfunction()">停止點讚</button>`;
@@ -57,12 +57,12 @@ async function btnfunction(isall) {
         console.log("back to page 1");
         await wait(Math.random() * 1000 + 500 | 0);
     };
-
+    const s = document.getElementsByClassName("dxYRhf");
     //click like
     while (true) {
-        const s = document.getElementsByClassName("dxYRhf");
 
-        for (let index = 0; index < s.length; index++) {
+        let slength = s.length
+        for (let i = 0; i < slength; i++) {
             s[0].closest("button").click();
             await wait((Math.random() + 2) * 1000 | 0);
             if (stopnow) {
@@ -70,9 +70,10 @@ async function btnfunction(isall) {
                 for (let item of stopbtnLocation) {
                     item.lastChild.remove();
                 };
+                isrunning = false;
                 return;
             };
-        };
+        }
 
         if (isShow(arrow[1]) && isall) {
             arrow[1].click();
@@ -98,12 +99,12 @@ function isShow(el) {
 };
 
 (async function placebtn() {
-    let isplace = false
+    let isplace = false;
+    let btnLocaton = document.getElementsByClassName("sc-192ftwf-0 kWAFb")[0];
+    let btnLocaton2 = document.getElementsByClassName("sc-xhhh7v-0 kYtoqc")[0];
     try {
         await wait(1000);
-        let btnLocaton = document.getElementsByClassName("sc-192ftwf-0 kWAFb")[0];
-        let btnLocaton2 = document.getElementsByClassName("sc-xhhh7v-0 kYtoqc")[0];
-        console.log("trying");
+        //console.log("trying");
         btnLocaton.insertAdjacentHTML("beforeend", btn);
         btnLocaton2.insertAdjacentHTML("afterend", btn);
         isplace = true
