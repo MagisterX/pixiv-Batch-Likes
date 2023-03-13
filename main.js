@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            pixiv批量點讚
 // @namespace       https://github.com/AndyTLemon/pixiv-Batch-Likes.git
-// @version         1.4
+// @version         1.4.1
 // @description     批量作品點讚
 // @author          AndyTLemon
 // @match           *www.pixiv.net/*/*/*
@@ -36,6 +36,8 @@ async function btnfunction(isall) {
         return;
     };
     isrunning = true;
+    stopnow = false;
+    
     //stopbtn
     const stopbtn = `<button name = "stopbtn" class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
         border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="stopbtnfunction()">停止點讚</button>`;
