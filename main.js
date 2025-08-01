@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            pixiv批量點讚
-// @namespace       https://github.com/AndyTLemon/pixiv-Batch-Likes.git
-// @version         1.5.3
+// @namespace       https://github.com/MagisterX/pixiv-Batch-Likes.git
+// @version         1.6.0
 // @description     批量作品點讚
 // @author          AndyTLemon 1.4.2; MagisterX 1.5+
 // @match           *www.pixiv.net/*/*/*
@@ -17,6 +17,8 @@ let isplace = false;
 
 //button
 const btn = `<nav name = "ClickLikeBtnNav" class="sc-192ftwf-0 kWAFb" style="justify-content: center;">
+<button class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
+border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="btnHideLiked()">Hide liked</button>
 <button class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
 border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="btnfunction(false)">Like a page</button>
 <button class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
@@ -66,14 +68,9 @@ async function btnfunction(isall) {
     };
     const liveElements = document.getElementsByClassName("eRAmZC");
     const liveElementsHearts = document.getElementsByClassName("cHNSiM");
-    //click like
+
     while (true) {
-        if (stopnow) {
-            //del stopbtn
-            for (let item of stopbtnLocation) {
-                item.lastChild.remove();
-            };
-            isrunning = false;
+        if (isStop(stopbtnLocation)) {
             return;
         };
         if(liveElements.length == 0){
@@ -82,7 +79,11 @@ async function btnfunction(isall) {
         }
         const s = Array.from(liveElementsHearts); //staticarray
         let slength = s.length
+        //click like
         for (let i = 0; i < slength; i++) {
+            if (isStop(stopbtnLocation)) {
+                return;
+            };
             s[i].closest("button").click();
             await wait(1200 | 0);
         }
@@ -109,6 +110,19 @@ function isShow(el) {
     var style = window.getComputedStyle(el);
     return (style.display === 'flex')
 };
+function isStop(stopbtnLocation) {
+    if (stopnow) {
+        //del stopbtn
+        for (let item of stopbtnLocation) {
+            item.lastChild.remove();
+        };
+        isrunning = false;
+        return true;
+    }
+    else {
+        return false;
+    };
+};
 function placebtn() {
     let btnLocaton = document.getElementsByClassName("sc-a6755c3a-0 dlidhK")[0];
     let btnLocaton2 = document.getElementsByClassName("dDrHMO")[1];
@@ -127,6 +141,17 @@ function placebtn() {
         return;
     }
 };
+
+function btnHideLiked() {
+    let allImages = document.getElementsByClassName("lbkCkj");
+    for (let img of allImages) {
+        let li = img.closest("li"); // finds nearest parent <li>
+        if (li) {
+            li.style.display = "none";
+        }
+    }
+};
+window.btnHideLiked = btnHideLiked;
 
 (async function run() {
     while(true){
