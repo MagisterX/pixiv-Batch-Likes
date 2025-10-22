@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            pixiv批量點讚
 // @namespace       https://github.com/MagisterX/pixiv-Batch-Likes.git
-// @version         1.6.0
+// @version         1.6.1
 // @description     批量作品點讚
 // @author          AndyTLemon 1.4.2; MagisterX 1.5+
 // @match           *www.pixiv.net/*/*/*
@@ -46,7 +46,7 @@ async function btnfunction(isall) {
     const stopbtn = `<button name = "stopbtn" class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
         border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="stopbtnfunction()">Stop</button>`;
 
-    let allImages = document.getElementsByClassName("gQCZLY");
+    let allImages = document.getElementsByClassName("jKHslz");
     if (allImages.length > 0) {
         console.log("Going to page 1");
         allImages[0].click();
@@ -58,16 +58,16 @@ async function btnfunction(isall) {
         item.insertAdjacentHTML("beforeend", stopbtn);
     };
 
-    let arrow = document.getElementsByClassName("dDrHMO");
+    let arrow = document.getElementsByClassName("gvRusp");
 
     //back to page 1
-    if (arrow.length > 0 && isShow(arrow[0]) && isall) {
+    if (!isFirstPage() && isall) {
         document.getElementsByTagName("nav")[2].getElementsByTagName("a")[1].click();
         console.log("back to page 1");
         await wait(3000 | 0);
     };
-    const liveElements = document.getElementsByClassName("eRAmZC");
-    const liveElementsHearts = document.getElementsByClassName("cHNSiM");
+    const liveElements = document.getElementsByClassName("drkqWI");
+    const liveElementsHearts = document.getElementsByClassName("dwCpYj");
 
     while (true) {
         if (isStop(stopbtnLocation)) {
@@ -110,6 +110,13 @@ function isShow(el) {
     var style = window.getComputedStyle(el);
     return (style.display === 'flex')
 };
+
+function isFirstPage() {
+    let btn = document.querySelector(".sc-facdf6d-1.jQOXFb span");
+    if (!btn) return false; // safety check
+    return btn.textContent.trim() === "1";
+}
+
 function isStop(stopbtnLocation) {
     if (stopnow) {
         //del stopbtn
@@ -123,9 +130,10 @@ function isStop(stopbtnLocation) {
         return false;
     };
 };
+
 function placebtn() {
-    let btnLocaton = document.getElementsByClassName("sc-a6755c3a-0 dlidhK")[0];
-    let btnLocaton2 = document.getElementsByClassName("dDrHMO")[1];
+    let btnLocaton = document.getElementsByClassName("sc-35ff1eaf-0 bSpaXW")[0];
+    let btnLocaton2 = document.getElementsByClassName("gvRusp")[1];
     try {
         //console.log("trying");
         if (!isplace){
@@ -143,7 +151,7 @@ function placebtn() {
 };
 
 function btnHideLiked() {
-    let allImages = document.getElementsByClassName("lbkCkj");
+    let allImages = document.getElementsByClassName("bVNeCg");
     for (let img of allImages) {
         let li = img.closest("li"); // finds nearest parent <li>
         if (li) {
