@@ -66,7 +66,7 @@ async function btnfunction(isall) {
         console.log("back to page 1");
         await wait(3000 | 0);
     };
-    const liveElements = document.getElementsByClassName("drkqWI");
+    const liveElements = document.getElementsByClassName("ijXKlM");
     const liveElementsHearts = document.getElementsByClassName("dwCpYj");
 
     while (true) {
