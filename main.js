@@ -8,6 +8,7 @@
 // @include         *www.pixiv.net/en/*
 // @grant           none
 // @icon            https://www.pixiv.net/favicon.ico
+// @run-at          document-end
 // ==/UserScript==
 
 const wait = ms => new Promise(res => setTimeout(res, ms));
@@ -163,8 +164,8 @@ window.btnHideLiked = btnHideLiked;
 
 (async function run() {
     while(true){
-        await wait(1000);
+        await wait(300);
         placebtn();
-        console.log("trying");
+        console.log("trying to render buttons");
     }
 })();
