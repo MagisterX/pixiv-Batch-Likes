@@ -1,3 +1,3 @@
 # pixiv_Batch-Likes
 
-把大量作品點讚
+Likes all artwork on page
