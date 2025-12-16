@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name            pixiv批量點讚
+// @name            pixiv batch like
 // @namespace       https://github.com/MagisterX/pixiv-Batch-Likes.git
-// @version         1.6.2
-// @description     批量作品點讚
+// @version         1.6.4
+// @description     Likes all artwork on page
 // @author          AndyTLemon 1.4.2; MagisterX 1.5+
 // @match           *www.pixiv.net/*/*/*
 // @include         *www.pixiv.net/en/*
@@ -47,7 +47,7 @@ async function btnfunction(isall) {
     const stopbtn = `<button name = "stopbtn" class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
         border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="stopbtnfunction()">Stop</button>`;
 
-    let showAllBtn = document.getElementsByClassName("isWGOH");
+    let showAllBtn = document.getElementsByClassName("jKHslz");
     if (showAllBtn.length > 0) {
         console.log("Going to page 1");
         showAllBtn[0].click();
@@ -59,7 +59,7 @@ async function btnfunction(isall) {
         item.insertAdjacentHTML("beforeend", stopbtn);
     };
 
-    let arrow = document.getElementsByClassName("dDrHMO");
+    let arrow = document.getElementsByClassName("gvRusp");
 
     //back to page 1
     if (!isFirstPage() && isall) {
@@ -67,8 +67,8 @@ async function btnfunction(isall) {
         console.log("back to page 1");
         await wait(3000 | 0);
     };
-    const liveElements = document.getElementsByClassName("eRAmZC");
-    const liveElementsHearts = document.getElementsByClassName("cHNSiM");
+    const liveElements = document.getElementsByClassName("iGxyRb");
+    const liveElementsHearts = document.getElementsByClassName("dwCpYj");
 
     while (true) {
         if (isStop(stopbtnLocation)) {
@@ -113,7 +113,7 @@ function isShow(el) {
 };
 
 function isFirstPage() {
-    let btn = document.querySelector(".sc-27a0ff07-1.dxfdGk span");
+    let btn = document.querySelector(".sc-facdf6d-1.jQOXFb span");
     if (!btn) return false; // safety check
     return btn.textContent.trim() === "1";
 }
@@ -133,27 +133,29 @@ function isStop(stopbtnLocation) {
 };
 
 function placebtn() {
-    let btnLocaton = document.getElementsByClassName("sc-a6755c3a-0 dlidhK")[0];
-    let btnLocaton2 = document.getElementsByClassName("dDrHMO")[1];
-    try {
-        //console.log("trying");
-        if (!isplace){
-        btnLocaton.insertAdjacentHTML("beforeend", btn);
-        isplace = true;
-        btnLocaton2.insertAdjacentHTML("afterend", btn);
-        };
-    } finally {
-        let btns = document.getElementsByClassName("kWAFb");
-        if (btns.length == 0){
-            isplace=false;
-        };
-        return;
+    const btnHtml = btn; // whatever your btn string is
+    const btn1 = document.getElementsByClassName("sc-35ff1eaf-1 iAMGbO")[0];
+    const btn2 = document.getElementsByClassName("gvRusp")[1];
+
+    if (!btn1) return;
+
+    // detect existing button by marker class
+    if (!btn1.querySelector(".kWAFb")) {
+        btn1.insertAdjacentHTML("beforeend", btnHtml);
     }
-};
+
+    if (!btn2) return;
+    const next = btn2.nextElementSibling;
+    const isBtnPlaced = next && next.classList.contains("kWAFb");
+
+    if (!isBtnPlaced) {
+        btn2.insertAdjacentHTML("afterend", btnHtml);
+    }
+}
 
 function btnHideLiked() {
-    let allImages = document.getElementsByClassName("lbkCkj");
-    for (let img of allImages) {
+    let likedImages = document.getElementsByClassName("bVNeCg");
+    for (let img of likedImages) {
         let li = img.closest("li"); // finds nearest parent <li>
         if (li) {
             li.style.display = "none";
@@ -166,6 +168,6 @@ window.btnHideLiked = btnHideLiked;
     while(true){
         await wait(300);
         placebtn();
-        console.log("trying to render buttons");
+        //console.log("trying to render buttons");
     }
 })();
