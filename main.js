@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            pixiv batch like
 // @namespace       https://github.com/MagisterX/pixiv-Batch-Likes.git
-// @version         1.6.4
+// @version         1.7.0
 // @description     Likes all artwork on page
 // @author          AndyTLemon 1.4.2; MagisterX 1.5+
 // @match           *www.pixiv.net/*/*/*
@@ -133,15 +133,23 @@ function isStop(stopbtnLocation) {
 };
 
 function placebtn() {
-    const btnHtml = btn; // whatever your btn string is
+    const btnHtml = btn; // whatever btn string is
     const btn1 = document.getElementsByClassName("sc-35ff1eaf-1 iAMGbO")[0];
     const btn2 = document.getElementsByClassName("gvRusp")[1];
+    const btnSearch = document.getElementsByClassName("sc-f3c87924-5 dbEvsz")[0];
 
-    if (!btn1) return;
+    if (btnSearch){
+        if (!btnSearch.querySelector(".kWAFb")) {
+            btnSearch.insertAdjacentHTML("beforeend", btnHtml);
+        }
+    }
 
-    // detect existing button by marker class
-    if (!btn1.querySelector(".kWAFb")) {
-        btn1.insertAdjacentHTML("beforeend", btnHtml);
+    if (btn1)
+    {
+        // detect existing button by marker class
+        if (!btn1.querySelector(".kWAFb")) {
+            btn1.insertAdjacentHTML("beforeend", btnHtml);
+        }
     }
 
     if (!btn2) return;
@@ -156,9 +164,17 @@ function placebtn() {
 function btnHideLiked() {
     let likedImages = document.getElementsByClassName("bVNeCg");
     for (let img of likedImages) {
-        let li = img.closest("li"); // finds nearest parent <li>
-        if (li) {
-            li.style.display = "none";
+
+        // Old layout (li)
+        let container = img.closest("li");
+
+        // New layout (div.col-span-2)
+        if (!container) {
+            container = img.closest("div.col-span-2");
+        }
+
+        if (container) {
+            container.style.display = "none";
         }
     }
 };
