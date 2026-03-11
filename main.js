@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            pixiv batch like
 // @namespace       https://github.com/MagisterX/pixiv-Batch-Likes.git
-// @version         1.7.0
+// @version         1.7.1
 // @description     Likes all artwork on page
 // @author          AndyTLemon 1.4.2; MagisterX 1.5+
 // @match           *www.pixiv.net/*/*/*
@@ -47,7 +47,7 @@ async function btnfunction(isall) {
     const stopbtn = `<button name = "stopbtn" class="sc-d98f2c-1 sc-192ftwf-1 ioZtRi" style="background-color: transparent;background-repeat: no-repeat; border: 2px solid #3acfff;
         border-radius: 100px;cursor: pointer;overflow: hidden;outline: none;" onclick="stopbtnfunction()">Stop</button>`;
 
-    let showAllBtn = document.getElementsByClassName("jKHslz");
+    let showAllBtn = document.getElementsByClassName("kaxsjw");
     if (showAllBtn.length > 0) {
         console.log("Going to page 1");
         showAllBtn[0].click();
@@ -59,7 +59,7 @@ async function btnfunction(isall) {
         item.insertAdjacentHTML("beforeend", stopbtn);
     };
 
-    let arrow = document.getElementsByClassName("gvRusp");
+    let arrow = document.getElementsByClassName("dDrHMO");
 
     //back to page 1
     if (!isFirstPage() && isall) {
@@ -67,8 +67,8 @@ async function btnfunction(isall) {
         console.log("back to page 1");
         await wait(3000 | 0);
     };
-    const liveElements = document.getElementsByClassName("iGxyRb");
-    const liveElementsHearts = document.getElementsByClassName("dwCpYj");
+    const liveElements = document.getElementsByClassName("jZbNpd");
+    const liveElementsHearts = document.getElementsByClassName("cHNSiM");
 
     while (true) {
         if (isStop(stopbtnLocation)) {
@@ -113,7 +113,7 @@ function isShow(el) {
 };
 
 function isFirstPage() {
-    let btn = document.querySelector(".sc-facdf6d-1.jQOXFb span");
+    let btn = document.querySelector(".sc-27a0ff07-0.bbkQMy span");
     if (!btn) return false; // safety check
     return btn.textContent.trim() === "1";
 }
@@ -134,9 +134,9 @@ function isStop(stopbtnLocation) {
 
 function placebtn() {
     const btnHtml = btn; // whatever btn string is
-    const btn1 = document.getElementsByClassName("sc-35ff1eaf-1 iAMGbO")[0];
-    const btn2 = document.getElementsByClassName("gvRusp")[1];
-    const btnSearch = document.getElementsByClassName("sc-f3c87924-5 dbEvsz")[0];
+    const btn1 = document.getElementsByClassName("sc-2a9a0ec2-0 kBdFPA")[0];
+    const btn2 = document.getElementsByClassName("dDrHMO")[1];
+    const btnSearch = document.getElementsByClassName("sc-d50bad69-5 fWBMuU")[0];
 
     if (btnSearch){
         if (!btnSearch.querySelector(".kWAFb")) {
@@ -162,7 +162,7 @@ function placebtn() {
 }
 
 function btnHideLiked() {
-    let likedImages = document.getElementsByClassName("bVNeCg");
+    let likedImages = document.getElementsByClassName("sc-87605cc5-1 lbkCkj");
     for (let img of likedImages) {
 
         // Old layout (li)
